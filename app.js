@@ -13,7 +13,7 @@ var scores, roundScore, activePlayer;
 
 scores = [0,0];
 roundScore = 0;
-activePlayer = 1;
+activePlayer = 0;
 
 //Vamos a crear los dados...
 //dice = Math.floor(Math.random() * 6) + 1; //esto me dara un numero entre el 1 al 6
@@ -55,6 +55,26 @@ document.querySelector('.btn-roll').addEventListener('click', function (){
         document.querySelector('#current-' + activePlayer).textContent = roundScore;
     }else{
         //siguiente jugador
+        activePlayer === 0 ? activePlayer = 1 : activePlayer = 0;
+        
+      //  if(activePlayer === 0){
+      //      activePlayer = 1;           ESTO ES LO MISMO QUE LO DE ARRIBA
+      //  }else{
+      //      activePlayer = 0;
+      //  }
+        roundScore = 0;
+
+        document.getElementById('current-0').textContent = '0';
+        document.getElementById('current-1').textContent = '0';
+
+        document.querySelector('.player-0-panel').classList.toggle('active'); //aqui utilizaamos el toggle que es alternar, pasa el fecto una y otra vez
+        document.querySelector('.player-1-panel').classList.toggle('active');
+
+        //document.querySelector('.player-0-panel').classList.remove('active'); *Linea 14 del index, remueve la clase active.
+        //document.querySelector('.player-1-panel').classList.add('active');    *Linea 23 del index, agrega la clase active.
+        //La clase active sirve para darle color cuando sea el turno de un jugador y el puntito rojo en el truno del jugador, quitaar y poner.
+
+        document.querySelector('.dice').style.display = 'none';
     }
 });
 
