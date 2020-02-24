@@ -9,7 +9,7 @@ GAME RULES:
 
 */
 
-var scores, roundScore, activePlayer;
+var scores, roundScore, activePlayer, gamePlaying;
 
 init();
 
@@ -31,30 +31,32 @@ init();
 //}
 
 document.querySelector('.btn-roll').addEventListener('click', function (){
-    //*Cuando presionemos el boton*
-    //1.Necesitamos un numero random
-    var dice = Math.floor(Math.random() * 6) + 1;
+    if (gamePlaying){
+        //*Cuando presionemos el boton*
+        //1.Necesitamos un numero random
+        var dice = Math.floor(Math.random() * 6) + 1;
 
-    //2.Necesitamos mostrar el resultado
-    var diceDOM = document.querySelector('.dice');
-    diceDOM.style.display = 'block';
-    diceDOM.src = 'dice-' + dice + '.png';
+         //2.Necesitamos mostrar el resultado
+        var diceDOM = document.querySelector('.dice');
+        diceDOM.style.display = 'block';
+        diceDOM.src = 'dice-' + dice + '.png';
 
-    //3.Actualizar la puntucion de la ronda, pero solo si el numero del dado no es 1.
-    if(dice !== 1){//diferente
-        //agregar puntaje
-        roundScore += dice;
-        document.querySelector('#current-' + activePlayer).textContent = roundScore;
-    }else{
-        //siguiente jugador
-        nextPlayer();
+        //3.Actualizar la puntucion de la ronda, pero solo si el numero del dado no es 1.
+        if(dice !== 1){//diferente
+            //agregar puntaje
+            roundScore += dice;
+            document.querySelector('#current-' + activePlayer).textContent = roundScore;
+        }else{
+            //siguiente jugador
+            nextPlayer();
     }
+}
 });
 
 
 
 document.querySelector('.btn-hold').addEventListener("click", function (){
-
+if (gamePlaying){
         //1-Agregar la calificaciones actual a la calificacion global 
         scores[activePlayer] += roundScore;
         //scores[activePlayer] = scores[activePlayer] + roundScore; *Esto es lo mismo que lo de arriba*
@@ -69,11 +71,13 @@ document.querySelector('.btn-hold').addEventListener("click", function (){
             document.querySelector('.dice').style.display = 'none';
             document.querySelector('.player-'+ activePlayer + '-panel').classList.add('winner'); //winner es un clase del archivo CSS que se agrga
             document.querySelector('.player-'+ activePlayer + '-panel').classList.remove('active'); //se elimina la clase active 
+            gamePlaying = false;
 
         }else{
         //4- siguinte jugador
         nextPlayer();
         }
+    }
 });
 
 function nextPlayer(){
@@ -107,6 +111,7 @@ function init(){
     scores = [0,0];
     roundScore = 0;
     activePlayer = 0;
+    gamePlaying = true;
 
     document.querySelector('.dice').style.display = 'none'; //oculto la imagen del dado cuando cargo la imagen...
 
@@ -114,7 +119,7 @@ function init(){
     document.getElementById('score-1').textContent = '0';
     document.getElementById('current-0').textContent = '0';
     document.getElementById('current-1').textContent = '0';
-    ddocument.getElementById('name-0').textContent = 'Player 1';
+    document.getElementById('name-0').textContent = 'Player 1';
     document.getElementById('name-1').textContent = 'Player 2';
     document.querySelector('.player-0-panel').classList.remove('winner');
     document.querySelector('.player-1-panel').classList.remove('winner');
