@@ -80,4 +80,22 @@ document.querySelector('.btn-roll').addEventListener('click', function (){
 
 
 
+document.querySelector('.btn-hold').addEventListener("click", function (){
+
+        //1-Agregar la calificaciones actual a la calificacion global 
+        scores[activePlayer] += roundScore;
+        //scores[activePlayer] = scores[activePlayer] + roundScore; *Esto es lo mismo que lo de arriba*
+
+
+        //2-Actualizar laintefaz del usuario
+        document.querySelector('#score-' + activePlayer).textContent = scores[activePlayer];
+
+        //3-Verificar si el jugador gano el juego
+
+
+
+});
+
+
+
 
