@@ -11,9 +11,7 @@ GAME RULES:
 
 var scores, roundScore, activePlayer;
 
-scores = [0,0];
-roundScore = 0;
-activePlayer = 0;
+init();
 
 //Vamos a crear los dados...
 //dice = Math.floor(Math.random() * 6) + 1; //esto me dara un numero entre el 1 al 6
@@ -26,12 +24,6 @@ activePlayer = 0;
 //Ahora creamos una variable y le almacenamos un digito del HTML hasta aqui.
 //var x = document.querySelector('#score-0').textContent;
 
-document.querySelector('.dice').style.display = 'none'; //oculto la imagen del dado cuando cargo la imagen...
-
-document.getElementById('score-0').textContent = '0';
-document.getElementById('score-1').textContent = '0';
-document.getElementById('current-0').textContent = '0';
-document.getElementById('current-1').textContent = '0';
 
 //function btn(){
 // *AQUI PODEMOS PONER LA FUNCION Y LUEGO LLAMARLA DENTRO DEL EVENTO PERO COMO SOLO 
@@ -75,8 +67,8 @@ document.querySelector('.btn-hold').addEventListener("click", function (){
         if(scores[activePlayer] >= 20){
             document.querySelector('#name-' + activePlayer).textContent = "Ganador!"
             document.querySelector('.dice').style.display = 'none';
-            document.querySelector('.player-'+ activePlayer + '-panel').classList.add('winner');
-            document.querySelector('.player-'+ activePlayer + '-panel').classList.remove('active');
+            document.querySelector('.player-'+ activePlayer + '-panel').classList.add('winner'); //winner es un clase del archivo CSS que se agrga
+            document.querySelector('.player-'+ activePlayer + '-panel').classList.remove('active'); //se elimina la clase active 
 
         }else{
         //4- siguinte jugador
@@ -107,6 +99,28 @@ function nextPlayer(){
 
         document.querySelector('.dice').style.display = 'none';
 
+}
+
+document.querySelector('.btn-new').addEventListener('click', init);
+
+function init(){
+    scores = [0,0];
+    roundScore = 0;
+    activePlayer = 0;
+
+    document.querySelector('.dice').style.display = 'none'; //oculto la imagen del dado cuando cargo la imagen...
+
+    document.getElementById('score-0').textContent = '0';
+    document.getElementById('score-1').textContent = '0';
+    document.getElementById('current-0').textContent = '0';
+    document.getElementById('current-1').textContent = '0';
+    ddocument.getElementById('name-0').textContent = 'Player 1';
+    document.getElementById('name-1').textContent = 'Player 2';
+    document.querySelector('.player-0-panel').classList.remove('winner');
+    document.querySelector('.player-1-panel').classList.remove('winner');
+    document.querySelector('.player-0-panel').classList.remove('active');
+    document.querySelector('.player-1-panel').classList.remove('active');
+    document.querySelector('.player-0-panel').classList.add('active');
 }
 
 
