@@ -55,7 +55,35 @@ document.querySelector('.btn-roll').addEventListener('click', function (){
         document.querySelector('#current-' + activePlayer).textContent = roundScore;
     }else{
         //siguiente jugador
-        activePlayer === 0 ? activePlayer = 1 : activePlayer = 0;
+        nextPlayer();
+    }
+});
+
+
+
+document.querySelector('.btn-hold').addEventListener("click", function (){
+
+        //1-Agregar la calificaciones actual a la calificacion global 
+        scores[activePlayer] += roundScore;
+        //scores[activePlayer] = scores[activePlayer] + roundScore; *Esto es lo mismo que lo de arriba*
+
+
+        //2-Actualizar laintefaz del usuario
+        document.querySelector('#score-' + activePlayer).textContent = scores[activePlayer];
+
+        //3-Verificar si el jugador gano el juego
+        if(scores[activePlayer] >= 20){
+            document.querySelector('#name-' + activePlayer).textContent = "Ganador!"
+
+        }else{
+        //4- siguinte jugador
+        nextPlayer();
+        }
+});
+
+function nextPlayer(){
+
+    activePlayer === 0 ? activePlayer = 1 : activePlayer = 0;
         
       //  if(activePlayer === 0){
       //      activePlayer = 1;           ESTO ES LO MISMO QUE LO DE ARRIBA
@@ -75,27 +103,8 @@ document.querySelector('.btn-roll').addEventListener('click', function (){
         //La clase active sirve para darle color cuando sea el turno de un jugador y el puntito rojo en el truno del jugador, quitaar y poner.
 
         document.querySelector('.dice').style.display = 'none';
-    }
-});
 
-
-
-document.querySelector('.btn-hold').addEventListener("click", function (){
-
-        //1-Agregar la calificaciones actual a la calificacion global 
-        scores[activePlayer] += roundScore;
-        //scores[activePlayer] = scores[activePlayer] + roundScore; *Esto es lo mismo que lo de arriba*
-
-
-        //2-Actualizar laintefaz del usuario
-        document.querySelector('#score-' + activePlayer).textContent = scores[activePlayer];
-
-        //3-Verificar si el jugador gano el juego
-
-
-
-});
-
+}
 
 
 
