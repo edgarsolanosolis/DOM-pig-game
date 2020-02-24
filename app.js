@@ -74,6 +74,9 @@ document.querySelector('.btn-hold').addEventListener("click", function (){
         //3-Verificar si el jugador gano el juego
         if(scores[activePlayer] >= 20){
             document.querySelector('#name-' + activePlayer).textContent = "Ganador!"
+            document.querySelector('.dice').style.display = 'none';
+            document.querySelector('.player-'+ activePlayer + '-panel').classList.add('winner');
+            document.querySelector('.player-'+ activePlayer + '-panel').classList.remove('active');
 
         }else{
         //4- siguinte jugador
